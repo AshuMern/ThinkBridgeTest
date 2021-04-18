@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+
+import { Container } from "react-bootstrap";
+import ModalView from "./components/modal";
+import TableView from "./components/table";
 
 function App() {
+  // Default State
+  const [inventoryData, setInventoryData] = useState([]);
+  const [modalState,setModalState]=useState();
+
+  console.log("inventoryDataParent", inventoryData);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <ModalView
+          setInventoryData={setInventoryData} //send the state from parent to child
+          inventoryData={inventoryData}
+          setModalState={setModalState}
+        />
+        {/* //send the state from parent to child */}
+        <TableView
+          inventoryData={inventoryData}
+          setInventoryData={setInventoryData}
+          modalState={modalState}
+
+        />
+      </Container>
     </div>
   );
 }
